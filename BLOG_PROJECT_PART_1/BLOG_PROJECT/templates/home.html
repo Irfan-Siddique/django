@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block content %}
+<div class="row d-flex justify-content-center flex-wrap">
+    {% for i in data %}
+  <div class="col-sm-3 mb-3 mb-sm-0">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">{{i.title}}</h5>
+        <p class="card-text">
+          {{i.content}}
+        </p>
+        <p>Author: {{i.author.name}}</p>
+        <p>Category: {% for cat in i.category.all %}
+          <button class="btn btn-primary btn-sm">
+            {{cat.name}}
+          </button>
+          {% endfor %}
+        </p>
+        <a href="{% url 'edit_post' i.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'delete_post' i.id %}" class="btn btn-danger">Delete</a>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock content %}
